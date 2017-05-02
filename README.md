@@ -1,19 +1,12 @@
-![python](https://img.shields.io/badge/python-2.7%20%26%203-blue.svg) [![licence](https://img.shields.io/badge/licence-GPL%20v2-blue.svg)](https://github.com/s4w3d0ff/python-poloniex/blob/master/LICENSE)  
-[![release](https://img.shields.io/github/release/s4w3d0ff/python-poloniex.svg) ![release build](https://travis-ci.org/s4w3d0ff/python-poloniex.svg?branch=v0.4.1)](https://github.com/s4w3d0ff/python-poloniex/releases)  
-[![master](https://img.shields.io/badge/branch-master-blue.svg) ![master build](https://api.travis-ci.org/s4w3d0ff/python-poloniex.svg?branch=master)](https://github.com/s4w3d0ff/python-poloniex/tree/master)  
-[![dev](https://img.shields.io/badge/branch-dev-blue.svg) ![dev build](https://api.travis-ci.org/s4w3d0ff/python-poloniex.svg?branch=dev)](https://github.com/s4w3d0ff/python-poloniex/tree/dev)  
-Inspired by [this](http://pastebin.com/8fBVpjaj) wrapper written by 'oipminer'
+
 
 ## Install latest release:
 Python 2:
 ```
-pip install https://github.com/s4w3d0ff/python-poloniex/archive/v0.4.1.zip
+$ virtualenv -p /usr/local/Cellar/python/2.7.13/bin/python2.7 venv
+
 ```
 
-Python 3:
-```
-pip3 install https://github.com/s4w3d0ff/python-poloniex/archive/v0.4.1.zip
-```
 
 ### Features:
 - The first 2 args in the `poloniex.Poloniex` object (`key` and `secret`) are _optional_ when used for _public api commands_.
