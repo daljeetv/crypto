@@ -1,29 +1,15 @@
 from __future__ import print_function, division
 from poloniex import Poloniex
-
-# import numpy as np
-# import cvxopt as opt
-# from cvxopt import blas, solvers
 import pandas as pd
 import datetime
 import time
-# import matplotlib.pyplot as plt
 
 tickers = ["BTC_XVC"]
 
 
-def unix_to_date(unix_timestamp):
-    return datetime.datetime.fromtimestamp(
-        int(unix_timestamp)
-    ).strftime('%Y-%m-%d %H:%M:%S')
-
-
 def calc_positions(macd_short=[], macd_long=[], prices=[]):
     def short_or_long(short=0, long=0):
-        if short > long:
-            return "short"
-        else:
-            return "long"
+        return "short" if short > long else "long"
     trades = []
     current_position = short_or_long(macd_short.value[0], macd_long.value[0])
     for tick in range(1, len(macd_long)):
@@ -37,12 +23,7 @@ def calc_positions(macd_short=[], macd_long=[], prices=[]):
     return trades
 
 
-if __name__ == '__main__':
-    polo = Poloniex(timeout=10)
-    for ticker in tickers:
-        print('currency_pair: %s' % ticker)
-        start = time.mktime(datetime.datetime(2012, 4, 30).timetuple())
-        end = time.mktime(datetime.datetime.now().timetuple())
+def get_trade_hist(ticker=""):
         """
            [{
                u'volume': u'1.43391941',
@@ -55,11 +36,19 @@ if __name__ == '__main__':
                u'open': u'0.00014091'
             }]
         """
-        trade_hist = polo.returnChartData(ticker,
-                                          period=300,
-                                          start=start,
-                                          end=end)
-        last_timestamp = trade_hist[-1]['date']
+        start = time.mktime(datetime.datetime(2012, 4, 30).timetuple())
+        end = time.mktime(datetime.datetime.now().timetuple())
+        return polo.returnChartData(ticker,
+                                    period=300,
+                                    start=start,
+                                    end=end)
+
+
+if __name__ == '__main__':
+    polo = Poloniex(timeout=10)
+    for ticker in tickers:
+        print('currency_pair: %s' % ticker)
+        trade_hist = get_trade_hist(ticker=ticker)
         time_price_dict = {}
         for trade in trade_hist:
             time_price_dict[trade['date']] = trade['weightedAverage']
@@ -69,21 +58,11 @@ if __name__ == '__main__':
                 {'value': [v for k, v in prices_arr]},
                 index=[pd.to_datetime(key, unit='s')
                        for key in [k for k, v in prices_arr]])
-        prices = df.rolling('300s').mean()
         macd_short = df.rolling('7400s').mean()
         macd_long = df.rolling('86400s').mean()
-        # ax = macd_short.plot(kind='line')
-        # ax = macd_long.plot(ax=ax)
-        # ax = prices.plot(ax=ax)
-        # plt.plot(stds, means, 'o', markersize=5)
-        # plt.ylabel('mean')
-        # plt.xlabel('std')
-        # plt.title('Momentum')
-        # plt.show(block=True)
         trades = calc_positions(macd_short, macd_long, df)
         total_gain = 0
         for t in range(2, len(trades)):
             gain = float(trades[t]['price']) - float(trades[t-1]['price'])
-            print('gain %f' % gain)
             total_gain += gain
         print(total_gain)
