@@ -7,8 +7,6 @@ $ virtualenv -p /usr/local/Cellar/python/2.7.13/bin/python2.7 venv
 $ pip install -r requiements.txt
 ```
 
-
-
 ## Usage:
 ### Basic Public Setup (no api Key/Secret):
 ```python
@@ -53,4 +51,3 @@ private = Poloniex(key, secret, coach=myCoach)
 ```
 
 **Examples of WAMP applications using the websocket push API can be found [here](https://github.com/s4w3d0ff/python-poloniex/tree/master/examples).**
-# crypto
