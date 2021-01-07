@@ -48,7 +48,7 @@ itypes==1.1.0
 jmespath==0.9.0
 kombu==4.0.2
 LinkChecker==9.3
-lxml==3.7.3
+lxml==4.6.2
 Markdown==2.6.7
 matplotlib==2.0.2
 mock==2.0.0
