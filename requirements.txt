@@ -59,7 +59,7 @@ oauthlib==2.0.1
 olefile==0.44
 pandas==0.20.2
 pbr==1.10.0
-Pillow==4.0.0
+Pillow==8.1.1
 poloniex==0.4.5
 portfolioopt==1.0.0
 psycopg2==2.6.2
