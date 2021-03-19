@@ -29,7 +29,7 @@ django-oauth-toolkit==0.11.0
 django-postgrespool==0.3.0
 django-sslify==0.2.7
 django-toolbelt==0.0.1
-djangorestframework==3.5.3
+djangorestframework==3.11.2
 docutils==0.13.1
 enum34==1.1.6
 evernote==1.25.2
